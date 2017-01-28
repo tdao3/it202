@@ -1,19 +1,29 @@
 <html>
     <head>
         <title>Hello</title>
-    </head>
-    <body>
-        <p id="p1">Hello jQuery</p>
-        <button id="button1">Click me!</button>
-    
-        <script src="https://ajax.googleapis.com/ajax/libs/
-        jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script>
-        $(function() {
-            $("#p1").on("mouseover" , function(){
+        $(function() {  //document ready event
+            $("#p1").on("mouseenter" , function(){
                 $("#p1").css("color", "blue");
+            })
+            $("#p1").on("mouseleave", function(){
+                $("#p1").css("color", "black");
+            })
+            
+            $("#p1").on("click", function(){
+                var fontsize = parseInt(($("#p1").css("font-size")));
+                fontsize = fontsize + 6 + "px";
+                $("#p1").css("font-size", fontsize)
+            })
+            $("#button1").on("click", function() {
+                $("#p1").hide();
             })
         })
     </script>
+     </head>
+    <body>
+        <p id="p1">Hello jQuery</p>
+        <button id="button1">Click me!</button>
     </body>
 </html>
