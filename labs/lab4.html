@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    </head>
+    <body>
+        <canvas id="canvas1" width="500" height="300" style="background:#001E62 ">
+        <script>
+        
+        var canvas = document.getElementById('canvas1');
+        var context = canvas.getContext('2d');
+        
+        function draw()
+        {
+            var centerX = canvas.width / 2;
+            var centerY = canvas.height / 2;
+            var radius = 100;
+    
+            context.beginPath();
+            context.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
+            context.fillStyle = '#D50032';
+            context.fill();
+            
+            context.fillStyle = 'white';
+            context.font = "50px Helvetica";
+            context.fillText("T.D",210,150);
+            context.fillText("UIC",200,200);
+        }
+        
+        function clear()
+        {
+            context.clearRect(0,0, 500, 300);
+            console.log('Hello');
+        }
+        
+        function doKeyDown(e)
+        {
+            if(e.keyCode == 88)
+            {
+                clear();
+            }
+            if(e.keyCode == 85)
+            {
+                draw();
+            }
+        }
+        
+        window.addEventListener("keydown", doKeyDown, true);
+        </script>
+        </canvas>
+        <canvas id="canvas2" width="500" height="300" style="background: yellow">
+            <script>
+            /* global context */
+            /* global centerX2 */
+            /* global centerY2 */
+            /* global doKeyDown2 */
+                var canvas2 = document.getElementById('canvas2');
+                var context2 = canvas2.getContext('2d');
+                var centerX2 = canvas2.width / 2;
+                var centerY2 = canvas2.height / 2;
+                var radius2 = 50;
+                var toggle = false;
+                
+                window.addEventListener("keydown", doKeyDown2, true);
+                
+                function doKeyDown2(e)
+                {
+                    if(e.keyCode == 38)
+                    {
+                        centerY2--;
+                    }
+                    if(e.keyCode == 40)
+                    {
+                        centerY2++;
+                    }
+                }
+                
+                function drawCircle()
+                {
+                    context2.clearRect(0,0, canvas2.width, canvas2.height);
+                    context2.beginPath();
+                    context2.arc(centerX2, centerY2, radius2, 0, 2 * Math.PI, false);
+                    context2.fillStyle = '#D50032';
+                    context2.fill();
+                    
+                    if((centerX2 + 50) == 500)
+                        toggle = true;
+                    if((centerX2 - 50) == 0)
+                        toggle = false;
+                        
+                    if(toggle)
+                    {
+                        centerX2--;
+                    }
+                    else
+                    {
+                        centerX2++;
+                    }
+                    
+                    requestAnimationFrame(drawCircle);
+                }
+                requestAnimationFrame(drawCircle);
+            </script>
+        </canvas>
+        
+    </body>
+</html>
