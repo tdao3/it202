@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> </title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    </head>
+    <body>
+        <canvas id="canvas1" width="500" height="300" style="background:#333333 ">
+            <script>
+                var canvas = document.getElementById('canvas1');
+                var context = canvas.getContext('2d');
+                
+                function drawWelcome()
+                {
+                    var centerX = canvas.width / 2;
+                    var centerY = canvas.height / 2;
+
+                    context.beginPath();
+                    context.rect(centerX - 100, centerY - 50, 200, 50);
+                    context.fillStyle = '#c0c0c0';
+                    context.fill();
+                    
+                    context.fillStyle = 'white';
+                    context.font = "40px Helvetica";
+                    context.fillText("Welcome!", centerX - 90, centerY - 10);
+                }
+
+                function doMouseDown(event)
+                {
+                    context.clearRect(0,0, 500, 300);
+                }
+                
+                drawWelcome();
+                canvas.addEventListener("onclick", doMouseDown(), false);
+            </script>
+        </canvas>
+
+    </body>
+</html>
