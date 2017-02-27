@@ -62,8 +62,8 @@
                     context.fill();
                     
                     context.fillStyle = 'white';
-                    context.font = "25px Helvetica";
-                    context.fillText("Game Over!", centerWelX - 90, centerWelY - 10);
+                    context.font = "30px Helvetica";
+                    context.fillText("Game Over!", centerWelX - 90, centerWelY - 15);
                 }
                 
                 
@@ -169,7 +169,7 @@
                     }
                     
                                         
-                    if(life < 0)
+                    if(life <= 0)
                     {
                         drawGameOver();
                         return;
