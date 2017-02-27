@@ -116,6 +116,9 @@
                            enemy[i].y < centerY + 25 &&
                            enemy[i].h + enemy[i].y > centerY) {
                                
+                               context.fillStyle = 'white';
+                               context.font = "20px Helvetica";
+                               context.fillText("You collided!", 200, 50 );
                                life--;
                             
                         }          
@@ -125,12 +128,13 @@
                            ben[i].y < centerY + 25 &&
                            ben[i].h + ben[i].y > centerY) {
                                
+                               context.fillStyle = 'white';
+                               context.font = "20px Helvetica";
+                               context.fillText("You collided!", 200, 50 );
                                life++;
                                score++;
                         }           
-
                     }
-                
                     requestAnimationFrame(drawPlayer);
                 }
                 
