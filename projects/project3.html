@@ -10,28 +10,199 @@
                 var canvas = document.getElementById('canvas1');
                 var context = canvas.getContext('2d');
                 
-                function drawWelcome()
+                // variables for player
+                var centerX = 40;
+                var centerY = canvas.height / 2;
+                var radius = 15;
+                var life = 3;
+                var score = 0;
+                var pup = document.createElement("IMG");
+                pup.setAttribute("src", "1.jpg");
+                pup.setAttribute("width", "10");
+                pup.setAttribute("height", "10");
+                pup.setAttribute("alt", "pup");
+
+                // variables for spawn
+                var spX = canvas.width - 20;
+                var spY = 10;
+                var enemy = [];
+                
+                enemy.push(new Shape(spX, spY, 10,10, "#D50032"));
+                enemy.push(new Shape(spX + 10, spY, 10,10, "#D50032"));
+                enemy.push(new Shape(spX, + 10, spY, 10,10, "#D50032"));
+                enemy.push(new Shape(spX, + 10, spY, 10,10, "#D50032"));
+                
+                // variables for benefits
+                var ben = [];
+                var spY2 = 30;
+                
+                ben.push(new Shape(spX, spY2, 10,10, "#00ff00"));
+                ben.push(new Shape(spX + 10, spY2, 10,10, "#00ff00"));
+                ben.push(new Shape(spX, + 10, spY2, 10,10, "#00ff00"));
+                ben.push(new Shape(spX, + 10, spY2, 10,10, "#00ff00"));
+                
+
+                function Shape(x, y, w, h, fill) {
+                    this.x = x;
+                    this.y = Math.floor(Math.random() * (canvas.height - 50 + 1) + 5);;
+                    this.w = 10;
+                    this.h = 10;
+                    this.fill = fill;
+                }
+                
+                // Say welcome 
+                function drawGameOver()
                 {
-                    var centerX = canvas.width / 2;
-                    var centerY = canvas.height / 2;
+                    var centerWelX = canvas.width / 2;
+                    var centerWelY = canvas.height / 2;
 
                     context.beginPath();
-                    context.rect(centerX - 100, centerY - 50, 200, 50);
+                    context.rect(centerWelX - 100, centerWelY - 50, 200, 50);
+                    context.fillStyle = '#c0c0c0';
+                    context.fill();
+                    
+                    context.fillStyle = 'white';
+                    context.font = "25px Helvetica";
+                    context.fillText("Game Over!", centerWelX - 90, centerWelY - 10);
+                }
+                
+                
+                // Say welcome 
+                function drawWelcome()
+                {
+                    var centerWelX = canvas.width / 2;
+                    var centerWelY = canvas.height / 2;
+
+                    context.beginPath();
+                    context.rect(centerWelX - 100, centerWelY - 50, 200, 50);
                     context.fillStyle = '#c0c0c0';
                     context.fill();
                     
                     context.fillStyle = 'white';
                     context.font = "40px Helvetica";
-                    context.fillText("Welcome!", centerX - 90, centerY - 10);
+                    context.fillText("Welcome!", centerWelX - 90, centerWelY - 10);
                 }
-
-                function doMouseDown(event)
+                
+                function lives()
                 {
-                    context.clearRect(0,0, 500, 300);
+                    context.fillStyle = 'white';
+                    context.font = "20px Helvetica";
+                    context.fillText("Lives: " + life, 10, 20);
+                    
+                    context.fillText("Score: " + score, 400, 20);
+                }
+                
+                // Start the game
+                function startGame()
+                {
+                    requestAnimationFrame(drawSpawn);
+                    drawSpawn();
+                    drawPlayer();
+
+                }
+                // Draw player
+                function drawPlayer()
+                {
+                    context.beginPath();
+                    //context.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
+                    context.drawImage(pup, centerX, centerY, 25, 25);
+                    context.fillStyle = '#ffffff';
+                    context.fill();
+                    
+                    for(var i = 0; i < 4; i++)
+                    {
+                        if (enemy[i].x < centerX + 25 &&
+                           enemy[i].x + 10 > centerX &&
+                           enemy[i].y < centerY + 25 &&
+                           enemy[i].h + enemy[i].y > centerY) {
+                               
+                               life--;
+                            
+                        }          
+                        
+                        if (ben[i].x < centerX + 25 &&
+                           ben[i].x + 10 > centerX &&
+                           ben[i].y < centerY + 25 &&
+                           ben[i].h + ben[i].y > centerY) {
+                               
+                               life++;
+                               score++;
+                        }           
+
+                    }
+                
+                    requestAnimationFrame(drawPlayer);
+                }
+                
+                function drawSpawn()
+                {
+                    context.clearRect(0,0, canvas.width, canvas.height);
+                    lives();
+                    
+                    context.fillStyle = enemy[0].fill;
+                    // clear previous 
+                    for(var i = 0; i < enemy.length; i++)
+                    {
+                        context.fillRect(enemy[i].x, enemy[i].y, enemy[i].w, enemy[i].h);
+                        enemy[i].x--;
+                        
+                        if(enemy[i].x == 10)
+                        {
+                            var randNum = Math.floor(Math.random() * (canvas.height - 50 + 1) + 5);
+                            enemy[i].x = canvas.width - 30;
+                            enemy[i].y = randNum;
+                        }
+                    }
+                    
+                    context.fillStyle = ben[0].fill;
+                    for(var i = 0; i < ben.length; i++)
+                    {
+                        context.fillRect(ben[i].x, ben[i].y, ben[i].w, ben[i].h);
+                        ben[i].x--;
+                        
+                        if(ben[i].x == 10)
+                        {
+                            var randNum = Math.floor(Math.random() * (canvas.height - 50 + 1) + 5);
+                            ben[i].x = canvas.width - 20;
+                            ben[i].y = randNum;
+                        }
+                    }
+                    
+                                        
+                    if(life < 0)
+                    {
+                        drawGameOver();
+                        return;
+                    }
+                    requestAnimationFrame(drawSpawn);
+                    
+                }
+                
+                // *Click* Clear the welcome and start the game
+                function doMouseDown()
+                {
+                    context.clearRect(0,0, canvas.width, canvas.height);
+                    startGame();
+                }
+                
+                // *Press* Move player up and down
+                function doKeyDown2(e)
+                {
+                   
+                    if(e.keyCode == 38)
+                    {
+                        centerY = centerY - 3;
+                    }
+                    if(e.keyCode == 40)
+                    {
+                        centerY = centerY + 3;
+                    }
+                    
                 }
                 
                 drawWelcome();
-                canvas.addEventListener("onclick", doMouseDown(), false);
+                canvas.addEventListener("mousedown", doMouseDown, false);
+                window.addEventListener("keydown", doKeyDown2, true);
             </script>
         </canvas>
 
