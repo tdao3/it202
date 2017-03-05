@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+  <head>
+      <!-- Include Dexie -->
+      <script src="https://unpkg.com/dexie@latest/dist/dexie.js"></script>
+
+      <script>
+          //
+          // Define your database
+          //
+          /* global Dexie */
+          var db = new Dexie("friend_database");
+          db.version(1).stores({
+              friends: 'name,shoeSize'
+          });
+          
+          db.version(2).stores({
+              pets: 'name, type'
+          });
+          
+        
+          /********************/
+          db.friends.put({name: "Nicolas", shoeSize: 8}).then (function(){
+              return db.friends.get('Nicolas');
+          }).then(function (friend) {
+              console.log("Nicolas has shoe size " + friend.shoeSize);
+          }).catch(function(error) {
+             alert ("Ooops: " + error);
+          });
+          
+          /********************/
+          //db.pets.put({name: "Sushi", type: "Shih Tzu"});
+          //db.pets.put({name: "Mizu", type: "Husky"});
+          //db.pets.put({name: "Pom Pom", type: "Pomeranian"})
+          
+          db.pets.put({name: "Sushi", type: "Shih Tzu"}).then (function(){
+              return db.pets.get('Sushi');
+          }).then(function (pets) {
+              console.log("Sushi is a " + pets.type);
+          }).catch(function(error) {
+             alert ("Ooops: " + error);
+          });
+          
+          db.pets.put({name: "Mizu", type: "Husky"}).then (function(){
+              return db.pets.get('Mizu');
+          }).then(function (pets) {
+              console.log("Mizu is a " + pets.type);
+          }).catch(function(error) {
+             alert ("Ooops: " + error);
+          });
+          
+          db.pets.put({name: "Pom Pom", type: "Pomeranian"}).then (function(){
+              return db.pets.get('Pom Pom');
+          }).then(function (pets) {
+              console.log("Pom Pom is a " + pets.type);
+          }).catch(function(error) {
+             alert ("Ooops: " + error);
+          });
+
+
+      </script>
+  </head>
+</html>
