@@ -1,0 +1,37 @@
+Round 1
+
+- The first implementation, the to do list consisted of a due date and time, but
+the user thought that it would be redundant to have both to do and reminders
+if they end up doing the same thing. So I changed the to do list into something
+that is similar to a posit it note, where it is something that you have to do
+, but has no specific due date to it.
+
+- The events cards at the beginning were all one color and displayed only todays
+events. The user thought that it would nice to display two days worth of events
+or more based on settings instead of just displaying the events for the day.
+Just in case that day you have nothing going on or you would like to check
+what you need to attend "tomorrow"
+
+- For the reminders originally there was a strict dude date and time, meaning
+only the specific day can be displayed under the "Date" column. The user thought
+that this works as intended since reminders are usually set for a specific day
+and time to alarm or make sound.
+
+- The About me was originally placed as an extra tab, but the user said it was 
+a bit unecessary to give a whole page to just the about me page.
+
+Round 2
+
+- I decided to give the user an option to not include a date and time under the
+to do list so that it can be arbitrary. The user thought this was a good choice 
+since it can give users more freedom using the to do list
+
+- The event card colors were changed from just being all the same color to 
+becoming a gradient. So the closer the event is to the current day, the brighter
+the event card will be. The events that are further away from the current day
+get a darker version of the colored card.
+
+- I kept the reminders the same since the user was satisfied with that option
+
+- For the about me I ended up putting it inside the "menu" bars so when the user
+clicks it, the bar will display the information about the developer on there.

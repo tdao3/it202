@@ -1,0 +1,7 @@
+{
+  "name": "My Day",
+  "short_name": "My Day",
+  "start_url": "project5.html?homescreen=1",
+  "display": "standalone",
+  "background_color": "#2196F3"
+}
