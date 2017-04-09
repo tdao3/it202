@@ -8,6 +8,40 @@
     <script src="https://unpkg.com/dexie@latest/dist/dexie.js"></script>
     <link rel=manifest href=manifest.json>
     <title>App</title>
+    
+    <script>
+          //
+          // Define your database
+          //
+          /* global Dexie */
+          /* global items */
+          var db = new Dexie("shopList");
+          db.version(1).stores({
+              items: 'Store, Category, Name, Price, Quantity'
+          });
+
+          //
+          // Put some data into it
+          //
+          db.friends.put({Store: "Target", Category: "Food", Name: "Fruit", Price: 3, Quantity: 1}).then (function(){
+              //
+              // Then when data is stored, read from it
+              //
+              return db.items.get('Target');
+          }).then(function (friend) {
+              //
+              // Display the result
+              //
+              alert ("Nicolas has shoe size " + items.Store);
+          }).catch(function(error) {
+             //
+             // Finally don't forget to catch any error
+             // that could have happened anywhere in the
+             // code blocks above.
+             //
+             alert ("Ooops: " + error);
+          });
+    </script>
 </head>
 <body>
 <!-- Simple header with fixed tabs. -->
@@ -29,21 +63,41 @@
     <span class="mdl-layout-title">Title</span>
   </div>
   <main class="mdl-layout__content">
+    <!-- PAGE 1 -->
     <section class="mdl-layout__tab-panel is-active" id="fixed-tab-1">
-      <div class="page-content"><!-- Your content goes here --></div>
+      <div class="page-content">
+        <!-- Simple Textfield -->
+        <form action="#">
+          <div id="txt" class="mdl-textfield mdl-js-textfield">
+            <input class="mdl-textfield__input" type="text" id="sample1">
+            <label class="mdl-textfield__label" for="sample1">Text...</label>
+          </div>
+
+          <div id="results">
+          </div>
+        </form>
+        
+        <!-- Flat button with ripple -->
+        <button id="btn" class="mdl-button mdl-js-button mdl-js-ripple-effect">
+          Submit
+        </button>
+        
+      </div>
     </section>
+    
+    <!-- PAGE 2 -->
     <section class="mdl-layout__tab-panel" id="fixed-tab-2">
       <div class="page-content">
         <!-- Simple Textfield -->
         <form action="#">
-          <div class="mdl-textfield mdl-js-textfield">
+          <div id="1" class="mdl-textfield mdl-js-textfield">
             <input class="mdl-textfield__input" type="text" id="sample1">
             <label class="mdl-textfield__label" for="sample1">Text...</label>
           </div>
         </form>
         <!-- Simple Textfield -->
         <form action="#">
-          <div class="mdl-textfield mdl-js-textfield">
+          <div id="2" class="mdl-textfield mdl-js-textfield">
             <input class="mdl-textfield__input" type="text" id="sample1">
             <label class="mdl-textfield__label" for="sample1">Text...</label>
           </div>
@@ -51,7 +105,7 @@
         
         <!-- Simple Textfield -->
         <form action="#">
-          <div class="mdl-textfield mdl-js-textfield">
+          <div id="3" class="mdl-textfield mdl-js-textfield">
             <input class="mdl-textfield__input" type="text" id="sample1">
             <label class="mdl-textfield__label" for="sample1">Text...</label>
           </div>
@@ -59,21 +113,21 @@
 
         <!-- Simple Textfield -->
         <form action="#">
-          <div class="mdl-textfield mdl-js-textfield">
+          <div id="4" class="mdl-textfield mdl-js-textfield">
             <input class="mdl-textfield__input" type="text" id="sample1">
             <label class="mdl-textfield__label" for="sample1">Text...</label>
           </div>
         </form>
         <!-- Simple Textfield -->
         <form action="#">
-          <div class="mdl-textfield mdl-js-textfield">
+          <div id="5" class="mdl-textfield mdl-js-textfield">
             <input class="mdl-textfield__input" type="text" id="sample1">
             <label class="mdl-textfield__label" for="sample1">Text...</label>
           </div>
         </form>
         
         <!-- Flat button with ripple -->
-        <button class="mdl-button mdl-js-button mdl-js-ripple-effect">
+        <button id="btn" class="mdl-button mdl-js-button mdl-js-ripple-effect">
           Click Me!
         </button>
       </div>
