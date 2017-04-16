@@ -1,17 +1,26 @@
-importScripts('/cache-polyfill.js');
+importScripts('./cache-polyfill.js');
 
 self.addEventListener('install', function(e) {
  e.waitUntil(
-   caches.open('airhorner').then(function(cache) {
+   caches.open('Aphig').then(function(cache) {
      return cache.addAll([
-       '/',
-       '/BigProject.html',
-       '/BigProject.html?homescreen=1',
-       '/?homescreen=1',
+       './BigProject.html',
+       './BigProject.html?homescreen=1',
+       './?homescreen=1',
+       './map.html',
+       './media.html',
+       './1.jpg',
+       './2.jpg',
+       './3.jpg',
+       './4.jpg',
+       './5.jpg',
+       './6.jpg',
+       './7.jpg'
      ]);
    })
  );
 });
+
 
 self.addEventListener('fetch', function(event) {
 console.log(event.request.url);
